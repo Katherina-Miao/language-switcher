@@ -10,7 +10,7 @@ class DemoPage extends Component {
     return (
       <div>
       <header>{this.props.title}</header>
-      <DemoComponent greeting={this.L('greeting')} howAreYou={this.L('howAreYou')} imgSrc={this.L('imgSrc')}/>
+      <DemoComponent greeting={this.L('greeting', {name:'Kathy',age:24})} howAreYou={this.L('howAreYou')} imgSrc={this.L('imgSrc')}/>
       </div>
     )
   }

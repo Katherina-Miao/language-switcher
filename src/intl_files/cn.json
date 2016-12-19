@@ -1,5 +1,5 @@
 {
-  "greeting": "你好世界,我是Kathy。",
+  "greeting": "你好世界,我是{name},今年{age}岁。",
   "howAreYou": "你好吗?",
   "imgSrc": "http://i1.hdslb.com/video/18/18a2d14a25b4c102e0ba385516aa4f19.jpg",
   "oneMonth": "一个月",

@@ -1,5 +1,5 @@
 {
-  "greeting": "Hello world, I'm Kathy.",
+  "greeting": "Hello world, I'm {name}, {age} years old.",
   "howAreYou": "How do you do?",
   "imgSrc": "http://pic.58pic.com/58pic/12/22/43/58h58PICtwJ.jpg",
   "oneMonth": "one month",
