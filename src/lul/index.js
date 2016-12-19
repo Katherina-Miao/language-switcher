@@ -56,8 +56,8 @@ export default class Lul {
   }
 
   register (funcName, method) {
-    if (typeof str !== 'function')
-    throw new TypeError('Formatter should be a function, but get a', typeof method) 
+    if (typeof method !== 'function')
+    throw new TypeError('Formatter should be a function, but get a', typeof method)
     this.formatters[funcName] = method
   }
 

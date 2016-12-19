@@ -8,7 +8,7 @@ const i18n = {
   translate (key, options) {
     options = options || {}
     var str = this.transText[key]
-    return this.matcher(str, object.assign(options, this.transText))
+    return this.matcher(str, Object.assign(options, this.transText))
   },
 
   matcher (str, options = {}){
