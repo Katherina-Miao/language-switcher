@@ -1,6 +1,4 @@
 import T from './i18n.js'
-import React from 'react'
-import ReactDom from 'react-dom'
 import formatters from './formatters'
 
 const DEFAULT_LANGUAGE = 'zh-CN'
@@ -11,7 +9,7 @@ export function getUALang () {
 }
 
 export default class Lul {
-  constructor (config) {
+  constructor (config, callback) {
     this.formatters = formatters
     this.root = config.root
     this.el = config.el
@@ -23,15 +21,13 @@ export default class Lul {
     if (config.useSystemLanguage) {
       currentLanguage = getUALang()
     } else if (localStorage.getItem('lul_language')) {
-      currentLanguage = config.defaultLanguage
+      currentLanguage = localStorage.getItem('lul_language')
     } else if (config.defaultLanguage) {
       currentLanguage = config.defaultLanguage
     }
     if (config.translateText) translateText = config.translateText
 
-    React.Component.prototype.L = this.L.bind(this)
-    React.Component.prototype.F = this.F.bind(this)
-
+    this.callback = callback
     this.setLanguage(currentLanguage, translateText)
   }
 
@@ -39,20 +35,21 @@ export default class Lul {
     const resolve = transAssert => {
       var translate = Object.assign({}, transAssert, transPatch)
       T.setTexts(translate)
-      if (this.react) {
-        localStorage.setItem('lul_language',this.currentLanguage)
-        location.reload()
-      } else {
-        this.react = ReactDom.render(this.root, this.el)
-      }
+      localStorage.setItem('lul_language',this.currentLanguage)
+      this.callback()
     }
 
     this.currentLanguage = language
     if (this.fileMap[language]) {
       this.fileMap[language](resolve)
     } else {
-      resolve({})
+      this.fileMap['zh-CN'](resolve)
     }
+  }
+
+  L (lan) {
+    localStorage.setItem('lul_language',lan)
+    location.reload()
   }
 
   register (funcName, method) {
@@ -61,7 +58,7 @@ export default class Lul {
     this.formatters[funcName] = method
   }
 
-  L (item, options) {
+  T (item, options) {
     if (typeof item === 'string') {
       return T.translate(item, options)
     } else {

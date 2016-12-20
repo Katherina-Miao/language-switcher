@@ -21,7 +21,7 @@ class DemoComponent extends Component {
         <p>
         {navigator.language}
         </p>
-        <DemoList list={this.L(['oneMonth', 'threeMonths', 'oneYear'])}/>
+        <DemoList list={this.T(['oneMonth', 'threeMonths', 'oneYear'])}/>
         <img src={this.props.imgSrc}/>
       </div>
     )
