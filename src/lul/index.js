@@ -27,7 +27,10 @@ export default class Lul {
     }
     if (config.translateText) translateText = config.translateText
 
-    this.callback = callback
+    this.T = this.$T.bind(this)
+    this.F = this.$F.bind(this)
+
+    this.getCallBack = function () { callback(this) }
     this.setLanguage(currentLanguage, translateText)
   }
 
@@ -36,7 +39,7 @@ export default class Lul {
       var translate = Object.assign({}, transAssert, transPatch)
       T.setTexts(translate)
       localStorage.setItem('lul_language',this.currentLanguage)
-      this.callback()
+      this.getCallBack()
     }
 
     this.currentLanguage = language
@@ -58,15 +61,18 @@ export default class Lul {
     this.formatters[funcName] = method
   }
 
-  T (item, options) {
-    if (typeof item === 'string') {
-      return T.translate(item, options)
-    } else {
-      return item.map((key) => { return T.translate(key, options) })
+  $T (item, options) {
+    if (item) {
+      if (typeof item === 'string') {
+        return T.translate(item, options)
+      } else {
+        return item.map((key) => { return T.translate(key, options) })
+      }
     }
+    return ''
   }
 
-  F (str, formatter) {
+  $F (str, formatter) {
     if (this.formatters[formatter] &&
         typeof this.formatters[formatter] === "function") {
       return this.formatters[formatter].bind(this)(str)

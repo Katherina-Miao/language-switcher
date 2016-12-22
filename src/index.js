@@ -4,15 +4,17 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import DemoPage from './DemoPage.js'
 
-var lul = new Lul({
+new lul = new Lul({
   useSystemLanguage: false,
   fileMap: fileMap,
-}, function() {
-  ReactDom.render(<DemoPage title="hello"/>, document.getElementById('app'))
+}, function (lul) {
+  ReactDom.render((
+    ReactDom.render(<DemoPage title="hello"/>, document.getElementById('app'))
+  ), document.getElementById('app'))
 })
 
-React.Component.prototype.T = lul.T.bind(lul)
-React.Component.prototype.F = lul.F.bind(lul)
+Component.prototype.T = lul.T
+Component.prototype.F = lul.F
 
 lul.register('addOne',function(a){
   return ++a
