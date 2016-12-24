@@ -9,8 +9,10 @@ class DemoPage extends Component {
   render() {
     return (
       <div>
-      <header>{this.props.title}</header>
-      <DemoComponent greeting={this.T('greeting', {name:'Kathy',age:24})} howAreYou={this.T('howAreYou')} imgSrc={this.T('imgSrc')}/>
+        <header>{this.props.title}</header>
+        <DemoComponent greeting={this.T('greeting', {name:'Kathy',age:24})} howAreYou={this.T('howAreYou')} imgSrc={this.T('imgSrc')}/>
+        <button onClick={()=>window.L('en-US')}> en-Us </button>
+        <button onClick={()=>L('zh-CN')}> zh-CN </button>
       </div>
     )
   }

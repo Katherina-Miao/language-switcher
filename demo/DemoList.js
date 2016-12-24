@@ -8,7 +8,7 @@ class DemoList extends Component {
   render() {
     let lis = this.props.list.map((item, index) =>{
         return (
-          <li>{item}</li>
+          <li key={index}>{item}</li>
         )
       }
     )

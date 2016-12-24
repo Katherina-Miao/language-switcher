@@ -1,6 +1,8 @@
+import { objectAssign } from './utils.js'
+
 const BRACE_REGEXP = /[{]\s*([^{}|]+)(?:\s*[|]\s*)?(?:[`]([^`]+)[`])?\s*[}]/g
 
-const i18n = {
+export default {
   setTexts (obj) {
     this.transText = obj
   },
@@ -8,12 +10,12 @@ const i18n = {
   translate (key, options) {
     options = options || {}
     var str = this.transText[key]
-    return this.matcher(str, Object.assign(options, this.transText))
+    return this.matcher(str, objectAssign(options, this.transText))
   },
 
   matcher (str, options = {}){
     if (typeof str !== 'string')
-    throw new TypeError('Template should be a string, but get a', typeof str)
+    throw new TypeError('Template should be string, but got ' + typeof str)
     return str.replace(BRACE_REGEXP, function (_, indicator, defaultValue) {
       if (
         options[indicator] !== null &&
@@ -31,5 +33,3 @@ const i18n = {
     })
   }
 }
-
-export default i18n

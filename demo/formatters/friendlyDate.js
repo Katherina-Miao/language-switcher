@@ -1,4 +1,4 @@
-function friendlyDate (sTime) {
+export function friendlyDate (sTime, language) {
   let dTime, dDay, dYear,
       cTime = Date.parse(new Date()) / 1000
 
@@ -20,7 +20,7 @@ function friendlyDate (sTime) {
     dDay = dTime / 3600 / 24;
     dYear = parseInt((new Date(cTime)).getYear()) - parseInt((new Date(sTime)).getYear());
 
-    if (this.currentLanguage === 'en-US') {
+    if (language === 'en-US') {
       if (dTime < 60) {
           return dTime + "seconds ago"
       } else if (dTime < 3600) {
@@ -54,4 +54,3 @@ function friendlyDate (sTime) {
       }
     }
 }
-export default { friendlyDate }
