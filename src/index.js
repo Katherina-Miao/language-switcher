@@ -2,8 +2,6 @@ import i18n from './i18n.js'
 import { isArray, getUALang, objectAssign } from './utils.js'
 import { getItem, setItem } from './store.js'
 
-const DEFAULT_LANGUAGE = 'zh-CN'
-
 /**
  *  @class
  *  @name Lul
@@ -13,33 +11,28 @@ export default class Lul {
   /**
    *  @constructs Lul
    *  @param {object} config
-   *  @param {boolean} config.useSystemLanguage
-   *  @param {string} config.defaultLanguage
    *  @param {string} config.storageKey - key for persistent current language
-   *  @param {object} config.fileMap - map of translate files
    *  @param {object} config.translateText
    *  @param {object} config.formatters
+   *  @param {function} config.translateFile - method for translate files
    *  @param {readyCallback} callback - fires when translation asserts are ready
    */
   constructor (config, callback) {
+    this.i18n = new i18n()
+
     this.formatters = config.formatters || {}
     this.storageKey = config.storageKey || 'locale'
-    if (config.fileMap) this.fileMap = config.fileMap
 
-    let currentLanguage = DEFAULT_LANGUAGE
+    let currentLanguage = getItem(this.storageKey)
     let translateText = {}
 
-    if (config.useSystemLanguage) {
-      currentLanguage = getUALang()
-    } else {
-      currentLanguage =
-        getItem(this.storageKey) || config.defaultLanguage || DEFAULT_LANGUAGE
-    }
     if (config.translateText) translateText = config.translateText
 
     this.T = this.$T.bind(this)
     this.F = this.$F.bind(this)
     this.L = this.$L.bind(this)
+
+    this.translateFile = config.translateFile
 
     this.getCallBack = function () { callback(this) }
     this.setLanguage(currentLanguage, translateText)
@@ -48,16 +41,19 @@ export default class Lul {
   setLanguage (language, transPatch) {
     const resolve = transAssert => {
       var translate = objectAssign({}, [transAssert, transPatch])
-      i18n.setTexts(translate)
+      this.i18n.setTexts(translate)
       localStorage.setItem(this.storageKey,this.currentLanguage)
       this.getCallBack()
     }
 
     this.currentLanguage = language
-    if (this.fileMap[language]) {
-      this.fileMap[language](resolve)
+    if (this.translateFile) {
+      this.translateFile({
+        systemLang: getUALang(),
+        selectedLang: language
+      }, resolve)
     } else {
-      this.fileMap[DEFAULT_LANGUAGE](resolve)
+      resolve()
     }
   }
 
@@ -104,9 +100,9 @@ export default class Lul {
    */
   $T (item, interpolations) {
     if (typeof item === 'string') {
-      return i18n.translate(item, interpolations)
+      return this.i18n.translate(item, interpolations)
     } else if (isArray(item)){
-      return item.map(key => i18n.translate(key, interpolations))
+      return item.map(key => this.i18n.translate(key, interpolations))
     } else {
       throw new TypeError('Translate item should be string or array, but got ' +
         typeof item)
