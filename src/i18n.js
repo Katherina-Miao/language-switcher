@@ -1,20 +1,16 @@
 import { objectAssign } from './utils.js'
 
-const BRACE_REGEXP = /[{]\s*([^{}|]+)(?:\s*[|]\s*)?(?:[`]([^`]+)[`])?\s*[}]/g
+const BRACE_REGEXP = /[{]\s*([^{}|]+)(?:\s*[|]\s*)?(?:[`]([^`]*)[`])?\s*[}]/g
 
 export default class i18n {
-  constructor () {
-
-  }
-  
-  setTexts (obj) {
+  constructor (obj) {
     this.transText = obj
   }
 
   translate (key, options) {
     options = options || {}
     var str = this.transText[key]
-    return this.matcher(str, objectAssign(options, this.transText))
+    return this.matcher(str, options)
   }
 
   matcher (str, options = {}){

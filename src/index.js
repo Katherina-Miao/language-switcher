@@ -9,16 +9,23 @@ import { getItem, setItem } from './store.js'
 export default class Lul {
 
   /**
+   *  @typedef {function} getTransFile
+   *  @param {object} lang
+   *  @param {string} lang.systemLang - system language
+   *  @param {string} lang.selectedLang - stored language
+   *  @param {function} resolve
+   *  @returns {string} format result
+   */
+  /**
    *  @constructs Lul
    *  @param {object} config
    *  @param {string} config.storageKey - key for persistent current language
    *  @param {object} config.translateText
    *  @param {object} config.formatters
-   *  @param {function} config.translateFile - method for translate files
+   *  @param {getTransFile} config.translateFile - method for translate files
    *  @param {readyCallback} callback - fires when translation asserts are ready
    */
   constructor (config, callback) {
-    this.i18n = new i18n()
 
     this.formatters = config.formatters || {}
     this.storageKey = config.storageKey || 'locale'
@@ -41,7 +48,7 @@ export default class Lul {
   setLanguage (language, transPatch) {
     const resolve = transAssert => {
       var translate = objectAssign({}, [transAssert, transPatch])
-      this.i18n.setTexts(translate)
+      this.i18n = new i18n(translate)
       localStorage.setItem(this.storageKey,this.currentLanguage)
       this.getCallBack()
     }
