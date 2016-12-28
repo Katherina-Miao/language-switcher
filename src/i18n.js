@@ -14,8 +14,10 @@ export default class i18n {
   }
 
   matcher (str, options = {}){
-    if (typeof str !== 'string')
-    throw new TypeError('Template should be string, but got ' + typeof str)
+    if (typeof str !== 'string') {
+      console.error('Template should be string, but '+ str +'got ' + typeof str)
+      return ''
+    }
     return str.replace(BRACE_REGEXP, function (_, indicator, defaultValue) {
       if (
         options[indicator] !== null &&
@@ -28,6 +30,8 @@ export default class i18n {
       ) {
         return defaultValue
       } else {
+        if (options[indicator] == undefined)
+          console.error('Got indicator '+ indicator + typeof indicator)
         return ''
       }
     })
