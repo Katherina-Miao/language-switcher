@@ -15,12 +15,13 @@ export default class Lul {
    *  @param {string} lang.selectedLang - stored language
    *  @param {function} resolve
    *  @returns {string} format result
+   *  @returns {string} selected language
    */
   /**
    *  @constructs Lul
    *  @param {object} config
    *  @param {string} config.storageKey - key for persistent current language
-   *  @param {object} config.translateText
+   *  @param {object|function} config.translateText
    *  @param {object} config.formatters
    *  @param {getTransFile} config.translateFile - method for translate files
    *  @param {readyCallback} callback - fires when translation asserts are ready
@@ -33,11 +34,21 @@ export default class Lul {
     let currentLanguage = getItem(this.storageKey)
     let translateText = {}
 
-    if (config.translateText) translateText = config.translateText
+    if (config.translateText) {
+      if (typeof config.translateText === "function") {
+        translateText = config.translateText({
+          systemLang: getUALang(),
+          selectedLang: currentLanguage
+        })
+      } else {
+        translateText = config.translateText
+      }
+    }
 
     this.T = this.$T.bind(this)
     this.F = this.$F.bind(this)
-    this.L = this.$L.bind(this)
+    this.setLang = this.$L.bind(this)
+    this.getLang = this.$G.bind(this)
 
     this.translateFile = config.translateFile
 
@@ -46,10 +57,10 @@ export default class Lul {
   }
 
   setLanguage (language, transPatch) {
-    const resolve = transAssert => {
+    const resolve = (transAssert, currentLanguage) => {
       var translate = objectAssign({}, [transAssert, transPatch])
+      this.currentLanguage = currentLanguage || language
       this.i18n = new i18n(translate)
-      localStorage.setItem(this.storageKey,this.currentLanguage)
       this.getCallBack()
     }
 
@@ -62,6 +73,13 @@ export default class Lul {
     } else {
       resolve()
     }
+  }
+  /**
+   *  Get current language
+   *  @function getLang
+   */
+  $G () {
+    return this.currentLanguage || getUALang() || ''
   }
 
   /**
@@ -95,6 +113,7 @@ export default class Lul {
       if (typeof error === 'function') return error()
       return
     }
+    this.currentLanguage = lang;
     if (typeof success === 'function') return success()
   }
 
@@ -123,13 +142,13 @@ export default class Lul {
    *  @param {string} fmtName - name of formatter
    *  @returns {string|string[]}
    */
-  $F (item, fmtName) {
+  $F (fmtName, item, ...params) {
     let formatter = this.formatters[fmtName]
     if (!formatter) return console.error("Unregistered formatter:", fmtName)
     if (typeof item === 'string' || typeof item === 'number') {
-      return formatter(item, this.currentLanguage)
+      return formatter(item, this.currentLanguage, ...params)
     } else if (isArray(item)) {
-      return item.map(str => formatter(str, this.currentLanguage))
+      return item.map(str => formatter(str, this.currentLanguage, ...params))
     } else {
       throw new TypeError('Format item should be number, string or array, but got ' +
         typeof item)

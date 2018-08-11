@@ -31,7 +31,7 @@ export function friendlyDate (sTime, language) {
           return parseInt(dDay) + "days ago"
       } else if (dDay >= 7 && dDay < 30) {
           return parseInt(dDay / 7) + 'weeks ago'
-      } else if (dDay >= 30) {
+      } else if (dDay >= 30 && dDay < 365) {
           return parseInt(dDay / 30) + 'months ago'
       } else if (dDay >= 365) {
           return parseInt(dDay / 365) + 'yeas ago'
@@ -47,7 +47,7 @@ export function friendlyDate (sTime, language) {
           return parseInt(dDay) + "天前"
       } else if (dDay >= 7 && dDay < 30) {
           return parseInt(dDay / 7) + '周前'
-      } else if (dDay >= 30) {
+      } else if (dDay >= 30 && dDay < 365) {
           return parseInt(dDay / 30) + '个月前'
       } else if (dDay >= 365) {
           return parseInt(dDay / 365) + '年前'

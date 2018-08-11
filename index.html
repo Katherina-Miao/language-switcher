@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .wrapper {
+            display: flex;
+
+        }
+        .wrapper>div {
+            flex:1;
+            overflow-x: scroll
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-
+    <div class="wrapper">
+        <div id="reactApp">
+        </div>
+        <div id="vueApp">
+        </div>
     </div>
     <script src="./dist/app.js"></script>
 </body>

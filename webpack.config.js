@@ -1,5 +1,6 @@
 var webpack = require("webpack")
 
+
 module.exports = {
     entry: {
         app: './demo/index.js'
@@ -12,6 +13,11 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader'
+        },
+        {
+            test: /\.vue$/,
+            exclude: /node_modules/,
+            loader: 'vue-loader'
         },
         {
             test: /\.json$/,

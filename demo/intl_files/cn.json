@@ -1,8 +1,16 @@
 {
   "greeting": "你好世界,我是{name},今年{age}岁。",
   "howAreYou": "你好吗?",
-  "imgSrc": "http://i1.hdslb.com/video/18/18a2d14a25b4c102e0ba385516aa4f19.jpg",
+  "imgSrc": "https://b-ssl.duitang.com/uploads/item/201606/15/20160615104143_2vZB4.thumb.700_0.jpeg",
   "oneMonth": "一个月",
   "threeMonths": "三个月",
-  "oneYear": "一年"
+  "oneYear": "一年",
+  "fruits": {
+    "apple": "苹果",
+    "banana": "香蕉",
+    "mandarin": {
+      "orange": "橙子",
+      "lemon": "柠檬"
+    }
+  }
 }

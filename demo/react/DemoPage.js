@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import DemoComponent from './DemoComponent.js'
 
 class DemoPage extends Component {
@@ -10,9 +11,9 @@ class DemoPage extends Component {
     return (
       <div>
         <header>{this.props.title}</header>
-        <DemoComponent greeting={this.T('greeting', {name:'Kathy',age:24})} howAreYou={this.T('howAreYou')} imgSrc={this.T('imgSrc')}/>
-        <button onClick={()=>window.L('en-US')}> en-Us </button>
-        <button onClick={()=>L('zh-CN')}> zh-CN </button>
+        <DemoComponent greeting={this.T('greeting', {name:'Kathy',age:26})} howAreYou={this.T('howAreYou')} imgSrc={this.T('imgSrc')}/>
+        <button onClick={() => this.setLang('en-US')}> en-US </button>
+        <button onClick={() => this.setLang('zh-CN')}> zh-CN </button>
       </div>
     )
   }
