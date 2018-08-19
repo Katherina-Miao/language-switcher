@@ -1,22 +1,22 @@
-import Lul from '../../src'
+import Switcher from '../../src'
 import getFile from '../intl_files'
 import React, { Component } from 'react'
 import ReactDom from 'react-dom'
 import DemoPage from './DemoPage.js'
 import formatters from '../formatters'
 
-var lul = new Lul({
+var switcher = new Switcher({
   formatters: formatters,
-  storageKey: 'lul_language',
+  storageKey: 'front_language',
   translateFile: getFile
-}, function (lul) {
+}, function (funs) {
   ReactDom.render(<DemoPage title={"Hello, React demo is here."}/>, document.getElementById('reactApp'))
 })
 
-Component.prototype.setLang = lul.setLang
-Component.prototype.T = lul.T
-Component.prototype.F = lul.F
+Component.prototype.setLang = funs.setLang
+Component.prototype.T = funs.T
+Component.prototype.F = funs.F
 
-lul.register('addOne',function(a){
+switcher.register('addOne',function(a){
   return ++a
 })

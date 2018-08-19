@@ -4,9 +4,9 @@ import { getItem, setItem } from './store.js'
 
 /**
  *  @class
- *  @name Lul
+ *  @name Switcher
  */
-export default class Lul {
+export default class Switcher {
 
   /**
    *  @typedef {function} getTransFile
@@ -18,7 +18,7 @@ export default class Lul {
    *  @returns {string} selected language
    */
   /**
-   *  @constructs Lul
+   *  @constructs Switcher
    *  @param {object} config
    *  @param {string} config.storageKey - key for persistent current language
    *  @param {object|function} config.translateText
@@ -157,5 +157,5 @@ export default class Lul {
 }
 /**
  * @callback readyCallback
- * @param {object} lul - the created instance
+ * @param {object} switcher - the created instance
  */

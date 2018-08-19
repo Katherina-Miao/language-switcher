@@ -170,10 +170,10 @@ var setItem = function setItem(key, value) {
 
 /**
  *  @class
- *  @name Lul
+ *  @name Switcher
  */
 
-var Lul = function () {
+var Switcher = function () {
 
   /**
    *  @typedef {function} getTransFile
@@ -185,7 +185,7 @@ var Lul = function () {
    *  @returns {string} selected language
    */
   /**
-   *  @constructs Lul
+   *  @constructs Switcher
    *  @param {object} config
    *  @param {string} config.storageKey - key for persistent current language
    *  @param {object|function} config.translateText
@@ -193,8 +193,8 @@ var Lul = function () {
    *  @param {getTransFile} config.translateFile - method for translate files
    *  @param {readyCallback} callback - fires when translation asserts are ready
    */
-  function Lul(config, callback) {
-    classCallCheck(this, Lul);
+  function Switcher(config, callback) {
+    classCallCheck(this, Switcher);
 
 
     this.formatters = config.formatters || {};
@@ -227,7 +227,7 @@ var Lul = function () {
     this.setLanguage(currentLanguage, translateText);
   }
 
-  createClass(Lul, [{
+  createClass(Switcher, [{
     key: 'setLanguage',
     value: function setLanguage(language, transPatch) {
       var _this = this;
@@ -358,9 +358,9 @@ var Lul = function () {
       }
     }
   }]);
-  return Lul;
+  return Switcher;
 }();
 
-return Lul;
+return Switcher;
 
 })));

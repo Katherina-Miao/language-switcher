@@ -1,17 +1,17 @@
-import Lul from '../../src'
+import Switcher from '../../src'
 import Vue from 'vue'
 import getFile from '../intl_files'
 import DemoPage from './DemoPage.vue'
 import formatters from '../formatters'
 
-var lul = new Lul({
+var switcher = new Switcher({
   formatters: formatters,
-  storageKey: 'lul_language',
+  storageKey: 'front_language',
   translateFile: getFile
-}, function (lul) {
-  Vue.prototype.T = lul.T
-  Vue.prototype.F = lul.F
-  Vue.prototype.setLang = lul.setLang
+}, function (funs) {
+  Vue.prototype.T = funs.T
+  Vue.prototype.F = funs.F
+  Vue.prototype.setLang = funs.setLang
   new Vue({
     el: '#vueApp',
     render: (h) => { 
@@ -21,6 +21,6 @@ var lul = new Lul({
 
 })
 
-lul.register('addOne',function(a){
+switcher.register('addOne',function(a){
   return ++a
 })

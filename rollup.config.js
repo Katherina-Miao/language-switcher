@@ -5,6 +5,6 @@ export default {
   format: 'umd',
   plugins: [ babel() ],
   dest: 'dist/index.js',
-  moduleId: 'lu_language',
-  moduleName: 'Lul'
+  moduleId: 'language_switcher',
+  moduleName: 'Switcher'
 }
