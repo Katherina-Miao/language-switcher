@@ -31,22 +31,19 @@ var switcher = new Switcher(options, function (funs) {
 
 ##### 选项 Options
 
-Name | Type | Description
-- | :-: | -:
-storageKey | String | 保存当前语言的键名
+Name | Type | Description
+:- | :-: | -:
+storageKey | String | 保存当前语言的键名
 formatters | Object | 格式化方法
 translateText | [Object, Function] | 翻译文本<br>方法会传入语言信息
-translateFile | Function | 异步请求翻译文件方法<br>方法会传入语言信息及请求处理函数
+translateFile | Function | 异步请求翻译文件方法<br>方法会传入语言信息及请求处理函数
 
-##### 接口 Interface
-
-创建实例的方法会返回一系列方法
+##### 接口 Interface
 
 Name | Description | Parameter | Return
-- |:-:| :- | -:
-$T | 翻译方法 |( item: String, interpolations: Object )<br>( list: Array[String], interpolations: Object ) | String<br>Array
-$F | 格式化方法 |( formatter: String, item: [String, Number], param1... )<br>( formatter: String, list: Array, param1... ) | Any
-
-
-
-
+:- |:-:| :- | -:
+T | 翻译方法 |( item: String, interpolations: Object )<br>( list: Array[String], interpolations: Object ) | String<br>Array
+F | 格式化方法 |( formatter: String, item: [String, Number], param1... )<br>( formatter: String, list: Array[String, Number], param1... ) | Any<br>Array[Any]
+setLang | 设置当前语言 | ( lang: String, error: Function, success: Function ) | --
+getLang | 获取当前语言 | -- | String
+register | 注册格式化方法 | ( formatter: String, func: Function ) | --
