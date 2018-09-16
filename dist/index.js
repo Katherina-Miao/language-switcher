@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define('lu_language', factory) :
-  (global.Lul = factory());
+  typeof define === 'function' && define.amd ? define('language_switcher', factory) :
+  (global.Switcher = factory());
 }(this, (function () { 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
@@ -123,7 +123,7 @@ function objectAssign(base, objects) {
 var localStore = {
   get: function get(key) {
     if (!key) return null;
-    if (window.localStorage) {
+    if (window && window.localStorage) {
       try {
         return localStorage.getItem(key);
       } catch (e) {

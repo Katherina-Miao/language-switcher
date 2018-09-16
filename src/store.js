@@ -1,7 +1,7 @@
 let localStore = {
   get (key) {
     if (!key) return null
-    if (window.localStorage) {
+    if (window && window.localStorage) {
       try {
         return localStorage.getItem(key)
       } catch(e) {
