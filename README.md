@@ -47,3 +47,5 @@ F | 格式化方法 |( formatter: String, item: [String, Number], param1... )<br
 setLang | 设置当前语言 | ( lang: String, error: Function, success: Function ) | --
 getLang | 获取当前语言 | -- | String
 register | 注册格式化方法 | ( formatter: String, func: Function ) | --
+
+详情请见 See MORE: https://katherina-miao.github.io/language-switcher/index.html
