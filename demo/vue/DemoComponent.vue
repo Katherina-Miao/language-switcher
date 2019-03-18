@@ -30,7 +30,7 @@
       </li>
     </ul>
   </ol>
-  <img :src="this.imgSrc"/>
+  <img :src="require(`../intl_files/images/${this.imgSrc}`)"/>
 </div>
 </template>
 

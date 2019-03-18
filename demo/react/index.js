@@ -10,12 +10,11 @@ var switcher = new Switcher({
   storageKey: 'front_language',
   translateFile: getFile
 }, function (funs) {
+  Component.prototype.setLang = funs.setLang
+  Component.prototype.T = funs.T
+  Component.prototype.F = funs.F
   ReactDom.render(<DemoPage title={"Hello, React demo is here."}/>, document.getElementById('reactApp'))
 })
-
-Component.prototype.setLang = funs.setLang
-Component.prototype.T = funs.T
-Component.prototype.F = funs.F
 
 switcher.register('addOne',function(a){
   return ++a

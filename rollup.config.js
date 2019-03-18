@@ -1,10 +1,14 @@
 import babel from 'rollup-plugin-babel'
 
 export default {
-  entry: 'src/index.js',
-  format: 'umd',
-  plugins: [ babel() ],
-  dest: 'dist/index.js',
-  moduleId: 'language_switcher',
-  moduleName: 'Switcher'
+  input: 'src/index.js',
+  output: {
+    format: 'umd',
+    file: 'dist/index.js',
+    name: 'Switcher',
+    amd:{
+      id: 'language_switcher'
+    }
+  },
+  plugins: [ babel() ]
 }
