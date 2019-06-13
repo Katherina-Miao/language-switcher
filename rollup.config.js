@@ -15,7 +15,7 @@ export default [{
   input: 'src/index.js',
   output: {
     format: 'es',
-    file: 'dist/index.es.js',
+    file: 'dist/index.esm.js',
     name: 'Switcher'
   },
   plugins: [babel()]
