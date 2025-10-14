@@ -27,25 +27,25 @@ var switcher = new Switcher(options, function (funs) {
 })
 ```
 
-#### API
-
 ##### 选项 Options
 
 Name | Type | Description
 :- | :-: | -:
-storageKey | String | 保存当前语言的键名
-formatters | Object | 格式化方法
-translateText | [Object, Function] | 翻译文本<br>方法会传入语言信息
-translateFile | Function | 异步请求翻译文件方法<br>方法会传入语言信息及请求处理函数
+storageKey | String | Key name for saving the current language
+formatters | Object | Formatting methods
+translateText | [Object, Function] | Translate text<br>The method receives language information
+translateFile | Function | Asynchronous request method for translation files<br>The method receives language information and request handler
 
 ##### 接口 Interface
 
 Name | Description | Parameter | Return
 :- |:-:| :- | -:
-T | 翻译方法 |( item: String, interpolations: Object )<br>( list: Array[String], interpolations: Object ) | String<br>Array
-F | 格式化方法 |( formatter: String, item: [String, Number], param1... )<br>( formatter: String, list: Array[String, Number], param1... ) | Any<br>Array[Any]
-setLang | 设置当前语言 | ( lang: String, error: Function, success: Function ) | --
-getLang | 获取当前语言 | -- | String
-register | 注册格式化方法 | ( formatter: String, func: Function ) | --
+T | Translation method |( item: String, interpolations: Object )<br>( list: Array[String], interpolations: Object ) | String<br>Array
+F | Formatting method |( formatter: String, item: [String, Number], param1... )<br>( formatter: String, list: Array[String, Number], param1... ) | Any<br>Array[Any]
+setLang | Set the current language | ( lang: String, error: Function, success: Function ) | --
+getLang | Get the current language | -- | String
+register | Register formatting method | ( formatter: String, func: Function ) | --
+
+For more details, see SEE MORE: https://katherina-miao.github.io/language-switcher/index.html
 
 详情请见 SEE MORE: https://katherina-miao.github.io/language-switcher/index.html
